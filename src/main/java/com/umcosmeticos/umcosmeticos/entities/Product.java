@@ -14,10 +14,15 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
+
     @Column(columnDefinition = "TEXT")
     private String descriptiom;
+
     private double price;
     private String imgUrl;
+
+    @OneToMany(mappedBy = "id.product")
+    private Set<OrderItem> items = new HashSet<>();
 
     @ManyToMany
     @JoinTable(name = "tb_product_category",
@@ -78,5 +83,13 @@ public class Product {
 
     public Set<Category> getCategories() {
         return categories;
+    }
+
+    public Set<OrderItem> getItems() {
+        return items;
+    }
+
+    public List<Order> getOrders() {
+        return items.stream().map(item -> item.getOrder()).toList();
     }
 }
