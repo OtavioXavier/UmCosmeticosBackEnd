@@ -57,12 +57,12 @@ public class Payment {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Payment payment = (Payment) o;
-        return id == payment.id && Objects.equals(createdAt, payment.createdAt) && Objects.equals(order, payment.order);
+        return id == payment.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, createdAt, order);
+        return Objects.hashCode(id);
     }
 
     @Override

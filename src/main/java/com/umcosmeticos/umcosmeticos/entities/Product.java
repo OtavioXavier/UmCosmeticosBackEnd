@@ -2,23 +2,22 @@ package com.umcosmeticos.umcosmeticos.entities;
 
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "tb_product")
 public class Product {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
 
     @Column(columnDefinition = "TEXT")
-    private String descriptiom;
+    private String description;
 
     private double price;
+
+    @Column(name = "img_url")
     private String imgUrl;
 
     @OneToMany(mappedBy = "id.product")
@@ -33,10 +32,9 @@ public class Product {
     public Product() {
     }
 
-    public Product(Long id, String name, String descriptiom, double price, String imgUrl) {
-        this.id = id;
+    public Product( String name, String description, double price, String imgUrl) {
         this.name = name;
-        this.descriptiom = descriptiom;
+        this.description = description;
         this.price = price;
         this.imgUrl = imgUrl;
     }
@@ -57,12 +55,12 @@ public class Product {
         this.name = name;
     }
 
-    public String getDescriptiom() {
-        return descriptiom;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescriptiom(String descriptiom) {
-        this.descriptiom = descriptiom;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public double getPrice() {
@@ -91,5 +89,17 @@ public class Product {
 
     public List<Order> getOrders() {
         return items.stream().map(item -> item.getOrder()).toList();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return Objects.equals(id, product.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }

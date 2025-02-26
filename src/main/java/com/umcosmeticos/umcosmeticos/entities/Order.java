@@ -92,12 +92,12 @@ public class Order {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
-        return id == order.id && Objects.equals(createdAt, order.createdAt) && status == order.status && Objects.equals(client, order.client) && Objects.equals(payment, order.payment);
+        return Objects.equals(id, order.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, createdAt, status, client, payment);
+        return Objects.hashCode(id);
     }
 
     @Override
