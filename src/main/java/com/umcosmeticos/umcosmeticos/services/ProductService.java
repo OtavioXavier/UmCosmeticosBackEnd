@@ -5,6 +5,7 @@ import com.umcosmeticos.umcosmeticos.entities.Product;
 import com.umcosmeticos.umcosmeticos.repositorys.ProductRepository;
 import com.umcosmeticos.umcosmeticos.services.exceptions.DatabaseException;
 import com.umcosmeticos.umcosmeticos.services.exceptions.ResourceNotFoundException;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -34,7 +35,7 @@ public class ProductService {
     }
 
     @Transactional
-    public ProductDTO insert(ProductDTO dto) {
+    public ProductDTO insert( ProductDTO dto) {
         Product entity = new Product();
         copyDTO(dto, entity);
         entity = repository.save(entity);
@@ -42,7 +43,7 @@ public class ProductService {
     }
 
     @Transactional
-    public ProductDTO update(Long id, ProductDTO dto) {
+    public ProductDTO update(Long id,  ProductDTO dto) {
             Product entity = repository.getReferenceById(id);
             copyDTO(dto, entity);
             entity = repository.save(entity);
