@@ -9,7 +9,7 @@ public class ProductDTO {
     @Size(min = 3, max = 80, message = "Nome deve ter entre 3 e 90 caracteres")
     private String name;
     @NotBlank(message = "Descrição é requerido")
-    @Size(min = 10, message = "Descrição dev ter 10 ou mais caracteres")
+    @Size(min = 10, message = "Descrição deve ter 10 ou mais caracteres")
     private String description;
     @Positive(message = "O preço deve ser positivo")
     private double price;
